@@ -3,14 +3,12 @@ const clockFace = document.querySelector('.clock-face');
 const progressBar = document.querySelector('.clock-progress-bar');
 var today = new Date();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-var hextime;
-var today;
 let count = setInterval(timer, 1000);
 let hexCount = setInterval(mouseTimer, 1000);
 clockFace.style.fontFamily = "trebuchet ms, sans serif";
 //clockFace.style.backgroundImage = "radial-gradient(red, blue)";
 console.dir(clockFace);
-console.log(time); //this logs console time on page load
+console.log(today); //this logs console time on page load
 
 clearInterval(hexCount);
 
@@ -27,9 +25,11 @@ function timer() {
   time = h + ":" + m + ":" + s;
   hexSec = s.toString(16);
   timeDisplay.textContent = time;
-  percent = (s / 100);
+  //changed percent to divide by 60. it was dividing by 100 because
+  //I'm an idiot.
+  percent = (s / 60);
   barLength = (14 * percent);
-  hexColor = `#4${hexSec}0${hexSec}`;
+  hexColor = `#3${hexSec}0${hexSec}`;
   clockFace.style.backgroundImage = `radial-gradient(${hexColor}, black)`;
   //clockFace.style.backgroundColor = `${hexColor}`;
   progressBar.style.width = `${barLength}rem`
@@ -49,7 +49,7 @@ function mouseTimer(){
   if (m <= 9) { m = "0"+m; }
   if (s <=9) { s = "0"+s; }
   time = h.toString(16) + ":" + m.toString(16) + ":" + s.toString(16);
-  percent = (s / 100);
+  percent = (s / 60);
   barLength = (14 * percent);
   progressBar.style.width = `${barLength}rem`
   timeDisplay.textContent = time;
