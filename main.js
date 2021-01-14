@@ -7,6 +7,8 @@ var hextime;
 var today;
 let count = setInterval(timer, 1000);
 let hexCount = setInterval(mouseTimer, 1000);
+clockFace.style.fontFamily = "trebuchet ms, sans serif";
+//clockFace.style.backgroundImage = "radial-gradient(red, blue)";
 console.dir(clockFace);
 console.log(time); //this logs console time on page load
 
@@ -14,7 +16,6 @@ clearInterval(hexCount);
 
 //timer() is the guts of the clock.
 function timer() {
-//clearInterval(mouseTimer);
 today = new Date();
 h = today.getHours();
 m = today.getMinutes();
@@ -27,17 +28,14 @@ time = h + ":" + m + ":" + s;
 hexSec = s.toString(16);
 timeDisplay.textContent = time;
 percent = (s / 100);
-//console.log(`Time: ${time} Percent: ${percent} Color: ${hexColor}`);
 barLength = (14 * percent);
 hexColor = `#4${hexSec}0${hexSec}`;
 clockFace.style.backgroundColor = `${hexColor}`;
 progressBar.style.width = `${barLength}rem`
+console.log(`Time: ${time} Percent: ${percent} Color: ${hexColor}`);
 return time;
 }
 
-//INTERVAL BELOW IS THE DEFAULT ENGINE FOR THE CLOCK - REACTIVATE
-//IF MOUSEOVERS DON'T WORK
-//setInterval(timer, 1000);
 
 
 function mouseTimer(){
@@ -56,7 +54,8 @@ progressBar.style.width = `${barLength}rem`
   timeDisplay.textContent = time;
   hexSec = s.toString(16);
   clockFace.style.backgroundColor = `${hexColor}`;
-  hexColor = `#${hexSec}${hexSec}${hexSec}`;
+  hexColor = `#4${hexSec}0${hexSec}`;
+  console.log(`Time: ${time} Percent: ${percent} Color: ${hexColor}`);
   //timeDisplay.textContent = `${hexColor}`;
 }
 function mouseFace(){
