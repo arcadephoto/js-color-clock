@@ -6,12 +6,15 @@ var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(
 var hextime;
 var today;
 let count = setInterval(timer, 1000);
+let hexCount = setInterval(mouseTimer, 1000);
 console.dir(clockFace);
 console.log(time); //this logs console time on page load
 
+clearInterval(hexCount);
 
 //timer() is the guts of the clock.
 function timer() {
+//clearInterval(mouseTimer);
 today = new Date();
 h = today.getHours();
 m = today.getMinutes();
@@ -37,25 +40,32 @@ return time;
 //setInterval(timer, 1000);
 
 
-function mouseFace(){
-  clearInterval(count);
+function mouseTimer(){
+clearInterval(count);
   today = new Date();
   h = today.getHours();
   m = today.getMinutes();
   s = today.getSeconds();
-  if (s <=9) {
-    s = "0"+s;
-  }
+  if (h <= 9) { h = "0"+h; }
+  if (m <= 9) { m = "0"+m; }
+  if (s <=9) { s = "0"+s; }
   time = h.toString(16) + ":" + m.toString(16) + ":" + s.toString(16);
-  //timeDisplay.textContent = time;
+percent = (s / 100);
+barLength = (14 * percent);
+progressBar.style.width = `${barLength}rem`
+  timeDisplay.textContent = time;
   hexSec = s.toString(16);
+  clockFace.style.backgroundColor = `${hexColor}`;
   hexColor = `#${hexSec}${hexSec}${hexSec}`;
-  timeDisplay.textContent = `${hexColor}`;
-
+  //timeDisplay.textContent = `${hexColor}`;
+}
+function mouseFace(){
+  hexCount = setInterval(mouseTimer, 1000);
 }
 function mouseFaceLeave(){
+  clearInterval(hexCount);
   count = setInterval(timer, 1000);
 }
 
-timeDisplay.addEventListener('mouseover', mouseFace);
+timeDisplay.addEventListener('mouseenter', mouseFace);
 timeDisplay.addEventListener('mouseleave', mouseFaceLeave);
