@@ -5,59 +5,57 @@ var today = new Date();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 var hextime;
 var today;
-var yourNum = 192;
+let count = setInterval(timer, 1000);
 console.dir(clockFace);
-console.log(time);
+console.log(time); //this logs console time on page load
 
 
-// function timer(){
-//   d = new Date();
-// 	h = d.getHours();
-// 	m = d.getMinutes();
-// 	s = d.getSeconds();
-//   time = `${h} ${m} ${s}`;
-//   timeDisplay.textContent = time;
-//   return time;
-
-
+//timer() is the guts of the clock.
 function timer() {
 today = new Date();
 h = today.getHours();
 m = today.getMinutes();
 s = today.getSeconds();
-if (h <= 9) {
-  h = "0"+h;
-}
-if (m <= 9) {
-  m = "0"+m;
-}
-if (s <=9) {
-  s = "0"+s;
-}
+//if hours, mins and secs are single digits, the statements below add a 0
+if (h <= 9) { h = "0"+h; }
+if (m <= 9) { m = "0"+m; }
+if (s <=9) { s = "0"+s; }
 time = h + ":" + m + ":" + s;
 hexSec = s.toString(16);
 timeDisplay.textContent = time;
 percent = (s / 100);
-console.log(`Time: ${time} Percent: ${percent} Hex: ${hexSec}`);
+//console.log(`Time: ${time} Percent: ${percent} Color: ${hexColor}`);
 barLength = (14 * percent);
+hexColor = `#4${hexSec}0${hexSec}`;
+clockFace.style.backgroundColor = `${hexColor}`;
 progressBar.style.width = `${barLength}rem`
 return time;
 }
 
-function secondTime(){
-  today = new Date();
-  seconds = today.getSeconds();
-  percent = seconds / 100;
-  console.log(percent);
-}
-
-setInterval(timer, 1000);
+//INTERVAL BELOW IS THE DEFAULT ENGINE FOR THE CLOCK - REACTIVATE
+//IF MOUSEOVERS DON'T WORK
+//setInterval(timer, 1000);
 
 
 function mouseFace(){
-  timeDisplay.textContent = yourNum.toString(16);
-  clockFace.style.backgroundColor = "red";
+  clearInterval(count);
+  today = new Date();
+  h = today.getHours();
+  m = today.getMinutes();
+  s = today.getSeconds();
+  if (s <=9) {
+    s = "0"+s;
+  }
+  time = h.toString(16) + ":" + m.toString(16) + ":" + s.toString(16);
+  //timeDisplay.textContent = time;
+  hexSec = s.toString(16);
+  hexColor = `#${hexSec}${hexSec}${hexSec}`;
+  timeDisplay.textContent = `${hexColor}`;
 
+}
+function mouseFaceLeave(){
+  count = setInterval(timer, 1000);
 }
 
 timeDisplay.addEventListener('mouseover', mouseFace);
+timeDisplay.addEventListener('mouseleave', mouseFaceLeave);
