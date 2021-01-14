@@ -16,30 +16,31 @@ clearInterval(hexCount);
 
 //timer() is the guts of the clock.
 function timer() {
-today = new Date();
-h = today.getHours();
-m = today.getMinutes();
-s = today.getSeconds();
-//if hours, mins and secs are single digits, the statements below add a 0
-if (h <= 9) { h = "0"+h; }
-if (m <= 9) { m = "0"+m; }
-if (s <=9) { s = "0"+s; }
-time = h + ":" + m + ":" + s;
-hexSec = s.toString(16);
-timeDisplay.textContent = time;
-percent = (s / 100);
-barLength = (14 * percent);
-hexColor = `#4${hexSec}0${hexSec}`;
-clockFace.style.backgroundColor = `${hexColor}`;
-progressBar.style.width = `${barLength}rem`
-console.log(`Time: ${time} Percent: ${percent} Color: ${hexColor}`);
-return time;
+  today = new Date();
+  h = today.getHours();
+  m = today.getMinutes();
+  s = today.getSeconds();
+  //if hours, mins and secs are single digits, the statements below add a 0
+  if (h <= 9) { h = "0"+h; }
+  if (m <= 9) { m = "0"+m; }
+  if (s <=9) { s = "0"+s; }
+  time = h + ":" + m + ":" + s;
+  hexSec = s.toString(16);
+  timeDisplay.textContent = time;
+  percent = (s / 100);
+  barLength = (14 * percent);
+  hexColor = `#4${hexSec}0${hexSec}`;
+  clockFace.style.backgroundImage = `radial-gradient(${hexColor}, black)`;
+  //clockFace.style.backgroundColor = `${hexColor}`;
+  progressBar.style.width = `${barLength}rem`
+  console.log(`Time: ${time} Percent: ${percent} Color: ${hexColor}`);
+  return time;
 }
 
 
 
 function mouseTimer(){
-clearInterval(count);
+  clearInterval(count);
   today = new Date();
   h = today.getHours();
   m = today.getMinutes();
@@ -48,12 +49,13 @@ clearInterval(count);
   if (m <= 9) { m = "0"+m; }
   if (s <=9) { s = "0"+s; }
   time = h.toString(16) + ":" + m.toString(16) + ":" + s.toString(16);
-percent = (s / 100);
-barLength = (14 * percent);
-progressBar.style.width = `${barLength}rem`
+  percent = (s / 100);
+  barLength = (14 * percent);
+  progressBar.style.width = `${barLength}rem`
   timeDisplay.textContent = time;
   hexSec = s.toString(16);
-  clockFace.style.backgroundColor = `${hexColor}`;
+  clockFace.style.backgroundImage = `radial-gradient(${hexColor}, black)`;
+  //clockFace.style.backgroundColor = `${hexColor}`;
   hexColor = `#4${hexSec}0${hexSec}`;
   console.log(`Time: ${time} Percent: ${percent} Color: ${hexColor}`);
   //timeDisplay.textContent = `${hexColor}`;
