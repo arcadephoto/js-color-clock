@@ -1,4 +1,4 @@
-##JS Color Clock##
+##JS Color Clock
 
 This was one of our first JavaScript projects for code school.
 The assignment was to make a digital clock that 1) changes color,
